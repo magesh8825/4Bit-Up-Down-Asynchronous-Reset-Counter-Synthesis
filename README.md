@@ -1,4 +1,4 @@
-# 4Bit-Up-Down-Asynchronous-Reset-Counter-Synthesis
+EXP 4: 4Bit-Up-Down Asynchronous Reset Counter-Synthesize the Gate Level Netlist and tabulate Area,Power and Timimg reports.
 
 ## Aim:
 
@@ -25,7 +25,25 @@ Synthesis requires three files as follows,
 •	In your terminal type “gedit input_constraints.sdc” to create an SDC File if you do not have one.
 
 •	The SDC File must contain the following commands;
+create_clock -name clk -period 2 -waveform {0 1} [get_ports "clk"]
 
+set_clock_transition -rise 0.1 [get_clocks "clk"]
+
+set_clock_transition -fall 0.1 [get_clocks "clk"]
+
+set_clock_uncertainty 0.01 [get_ports "clk"]
+
+set_input_delay -max 0.8 [get_ports "rst"] -clock [get_clocks "clk"]
+
+set_output_delay -max 0.8 [get_ports "count"] -clock [get_clocks "clk"]
+
+i→ Creates a Clock named “clk” with Time Period 2ns and On Time from t=0 to t=1.
+
+ii, iii → Sets Clock Rise and Fall time to 100ps.
+
+iv → Sets Clock Uncertainty to 10ps.
+
+v, vi → Sets the maximum limit for I/O port delay to 1ps.
 create_clock -name clk -period 2 -waveform {0 1} [get_ports "clk"]
 
 set_clock_transition -rise 0.1 [get_clocks "clk"]
@@ -64,12 +82,16 @@ used.
 • Genus Script file with .tcl file Extension commands are executed one by one to synthesize the netlist.
 
 #### Synthesis RTL Schematic :
+![image](https://github.com/user-attachments/assets/7cc0f080-ff82-46c5-9e53-f1810befc19a)
 
 #### Area report:
+![image](https://github.com/user-attachments/assets/b479a0ab-a238-4607-9ffc-63e76584952f)
 
 #### Power Report:
+![image](https://github.com/user-attachments/assets/4db8db9a-814f-4cd7-aa4c-ddfbdc927009)
 
 #### Timing Report: 
+![image](https://github.com/user-attachments/assets/a66b1690-5961-4199-ac35-3e4a800f1733)
 
 #### Result: 
 
